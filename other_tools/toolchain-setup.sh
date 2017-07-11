@@ -1,7 +1,22 @@
 #! /bin/bash
-if [ -n -w "/opt/espressif" ]; then
+
+requires() {
+	[ -z "$(which "$1")" ] && {
+		echo "$1 required but not available. On Ubuntu install the $2 package."
+		exit 1
+	}
+}
+
+requires git    git
+requires curl   curl
+requires xzcat  xz-utils
+requires make   make
+requires python "python and python-serial"
+
+[ -w "/opt/espressif/" ] || {
 	echo "Please run as root or grant write permissions to /opt/espressif/ directory."
-fi
+	exit 1
+}
 
 # Give up immediately on error, so they don't escalate
 set -e
