@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html ng-app="myApp" ng-cloak>
+<head>
+<title>Very Small Size Soccer Bot</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="w3.css">
+<script src="angular-1.6.4.min.js"></script>
+<script src="protobuf-6.8.0.min.js"></script>
+</head>
+<body ng-controller="vsssBotController">
+
+<header class="w3-container w3-teal">
+	<h1>Very Small Size Soccer Bot</h1>
+</header>
+
+<div class="w3-row">
+	<div class="w3-col w3-panel l4 m6 s12">
+		<div class="w3-card-4">
+			<div class="w3-container w3-teal"><h2> Controls </h2></div>
+			<table>
+				<tr>
+					<td>Left wheel: </td>
+					<td><input type="range" min="0" max="10" value="4" ng-model="left_vel_rng"  ng-change="onSpeedChange()"> </td>
+					<td>{{speedCaptions[left_vel_rng]}}</td>
+				</tr>
+				<tr>
+					<td>Right wheel: </td>
+					<td><input type="range" min="0" max="10" value="4" ng-model="right_vel_rng"  ng-change="onSpeedChange()"> </td>
+					<td>{{speedCaptions[right_vel_rng]}}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="w3-panel w3-col l4 m6 s12">
+		<div class="w3-card-4">
+			<div class="w3-container w3-teal"><h2> Status: </h2></div>
+			<table>
+				<tr>
+					<td>Connection:</td>
+					<td>{{ online ? "Online" : "Offline" }}</td>
+				</tr>
+				<tr>
+					<td> Ping: </td>
+					<td> {{ ping }} ms</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="w3-panel w3-col l4 m6 s12">
+		<div class="w3-card-4">
+		a
+		</div>
+	</div>
+	<div class="w3-panel w3-col l4 m6 s12">
+		<div class="w3-card-4">
+		b
+		</div>
+	</div>
+	<div class="w3-panel w3-col l4 m6 s12">
+		<div class="w3-card-4">
+		c
+		</div>
+	</div>
+	<div class="w3-panel w3-col l4 m6 s12">
+		<div class="w3-card-4">
+		d
+		</div>
+	</div>
+	<div class="w3-panel w3-col l4 m6 s12">
+		<div class="w3-card-4">
+		e
+		</div>
+	</div>
+</div>
+
+
+<footer class="w3-container w3-teal">
+  <h5>Footer</h5>
+  <p>Footer information goes here</p>
+</footer>
+</body>
+<script src="vsss-bot.js"></script>
+</html>
