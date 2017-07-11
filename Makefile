@@ -27,8 +27,3 @@ html:
 # Program the ESP8266 OTA using TFTP.
 wiflash:
 	tftp -v -m octet ${ESPIP} -c put firmware/${PROGRAM}.bin firmware.bin
-
-# This file contains passwords, so it is ignored by git.
-# A sample with default values is provided, though.
-include/private_ssid_config.h:
-	cp include/private_ssid_config.h.sample include/private_ssid_config.h
