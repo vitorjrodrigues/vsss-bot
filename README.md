@@ -10,16 +10,28 @@ Easy way: Clone this repo then run `toolchain-setup.sh` from `other_tools`.
 **OR:**
 
 1. Linux OS strongly suggested, just cause.
-2. Get a working toolchain from one of the methods:
-  + Compile from sources:
-    1. Get sources by cloning [esp-open-sdk](https://github.com/pfalcon/esp-open-sdk).
-    2. Follow compilation instructions, making sure that C++ is enabled.
-    3. Copy `xtensa-lx106-elf` and `esptool` folders to `/opt/espressif/`.
-  + Get a copy of my binaries, tested on Ubuntu 16.04 and Fedora 25.
-    1. Download from [here](https://app.cear.ufpb.br/owncloud/index.php/s/LrvHW9WsqGsF3k1/download).
-    2. Extract under /opt/espressif/.
-4. Get the SDK working:
-  + Clone the [esp-open-rtos](https://github.com/SuperHouse/esp-open-rtos) under /opt/espressif/.
-  + Enter the folder `/opt/espressif/esp-open-rtos`.
-  + Run run `cppchk.sh` (from this projec's `other_tools` folder) to see what files need patching for C++.
-  + If it seems right then run `cppchk.sh --fix` to apply the patches.
+2. Get the toolchain from [my binaries](https://app.cear.ufpb.br/owncloud/index.php/s/LrvHW9WsqGsF3k1/download) or by compiling [esp-open-sdk](https://github.com/pfalcon/esp-open-sdk). Place the `xtensa-lx106-elf` and `esptool` folders under `/opt/espressif/`.
+4. Get the SDK working by cloning (with `--recursive`) [esp-open-rtos](https://github.com/SuperHouse/esp-open-rtos) under `/opt/espressif/`. Once downloaded `cd` to `esp-open-rtos` and run `cppchk.sh --fix` to patch all headers for C++ compatibility.
+
+Using
+-----
+
+1. If your ESP8266 is not yet configures for yout wireless network then:
+  * Set your WiFi credentials in include/private_ssid_config.h.
+  * Set `updateWirelessSettings = true` in `main.cpp`.
+2. For initial flashing run
+```bash
+make clean
+make html
+make -j8
+make test
+```
+3. After initial flashing you can update Over-The-Air.
+```bash
+make html
+make -j8
+ESPIP=192.168.1.999 make wiflash
+```
+4. Control the bot:
+  * Via browser, by just navigating tho `ESPIP`.
+  * Via protobuf-tcp on port 5556.

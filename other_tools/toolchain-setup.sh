@@ -3,6 +3,9 @@ if [ -n -w "/opt/espressif" ]; then
 	echo "Please run as root or grant write permissions to /opt/espressif/ directory."
 fi
 
+# Give up immediately on error, so they don't escalate
+set -e
+
 SCRIPT=$(realpath "$0")
 SCRIPTDIR=$(dirname "$SCRIPT")
 
@@ -15,7 +18,7 @@ xzcat | tar -xv
 
 # Download the SDK
 git clone --recursive 'https://github.com/SuperHouse/esp-open-rtos'
-cd esp-open-rtos
+cd /opt/espressif/esp-open-rtos
 
 # Patch headers for C++ compatibility
 "$SCRIPTDIR/cppchk.sh" --fix

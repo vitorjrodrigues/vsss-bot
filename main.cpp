@@ -13,12 +13,14 @@
 #include "httpd/httpd.h"
 #include "ota-tftp.h"
 #include <sys/socket.h>
-#include "private_ssid_config.h"
 #include "pb.h"
 #include "pb_decode.h"
 #include "command.pb.h"
 #include "sigma_delta_speed.h"
 #include "quadrature_decoder.h"
+
+#include "private_ssid_config.h"
+bool updateWirelessSettings = false;
 
 #define debug_printf printf
 
@@ -142,7 +144,7 @@ extern "C" void user_init(void)
 	printf("Pi = %f\n", M_PI);
 	
 	// If enabled this will replace ESP's persistent WiFi settings
-	if (false) {
+	if (updateWirelessSettings) {
 		sdk_station_config config;
 		strcpy((char*)config.ssid, WIFI_SSID);
 		strcpy((char*)config.password, WIFI_PASS);
