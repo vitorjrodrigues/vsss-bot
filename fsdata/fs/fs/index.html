@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html ng-app="myApp" ng-cloak>
+<head>
+<title>UFPBots - VSSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="w3.css">
+<script src="angular-1.6.4.min.js"></script>
+<script src="protobuf-6.8.0.min.js"></script>
+<script src="jquery-2.1.1.min.js"></script>
+</head>
+
+<body id="vsssBotController" ng-controller="vsssBotController">
+<header class="w3-container w3-teal">
+	<h1>O.T.T.E.R. Dev Page</h1>
+</header>
+
+<div class="w3-row">
+	<div class="w3-col w3-panel l4 m6 s12">
+		<div class="w3-card-4">
+			<div class="w3-container w3-teal"><h2> Controls </h2></div>
+			<div class="w3-container w3-border w3-center">
+  				<td><p>Status</p></td>
+				<td><p id="CONN">Connection:</td>
+				<td>{{ online ? "Online" : "Offline" }}</p></td>
+				<tr>
+					<td>           Ping: </td>
+					<td> {{ ping }} ms</td>
+				</tr>
+			</div>
+			<table>
+				<tr>
+					<td><input type="range" id="sliderL"  min="0" max="20" value="10" ng-model="left_vel_rng"  ng-change="onSpeedChange()" ng-mouseup="reset()"/></td>							
+					<td><p id="LW">⚙ Left</p></td>
+					<td>{{speedCaptions[left_vel_rng]}}</td>
+					<td><input type="range" id="LsliderR" min="0" max="20" value="10" ng-model="double_vel_rng"  ng-change="doubleSpeedChange()" ng-mouseup="reset()"/></td>
+					<td>{{speedCaptions[right_vel_rng]}}</td>
+					<td><p id="RW"> Right⚙</p></td>
+					<td><input type="range" id="sliderR" min="0" max="20" value="10" ng-model="right_vel_rng"  ng-change="onSpeedChange()" ng-mouseup="reset()"/></td>
+					<br/><br>
+					<td>. <br/> . <br/> . <br/> . <br/> . <br/> . <br/></td>
+				</tr>
+			</table>			
+		</div>
+	</div>
+</div>
+<div class="w3-row">
+	<div class="w3-panel w3-col l4 m6 s12">
+		<div class="w3-card-4">
+			<div class="w3-container w3-teal"><h2> BUTTONS </h2></div>
+			<div class="w3-container w3-border w3-center">			
+			<table>
+				<td><br/><br/></td>
+				<tr>
+					<td><button>_</button>
+					<button ng-mousedown="ahead()" ng-mouseup="reset()">^</button>
+					<button>_</button></td>
+				</tr>
+				<tr>
+					<td><button ng-mousedown="turnLeft()" ng-mouseup="reset()"><</button>
+					<button ng-mousedown="resetbtn()">X</button>
+					<button ng-mousedown="turnRight()" ng-mouseup="reset()">></button></td>
+					<td><input id="speed" type="range" min="0" max="6" ng-model="speed"/></td>
+				</tr>
+				<tr>
+					<td><button>_</button>
+					<button ng-mousedown="retreat()" ng-mouseup="reset()">v</button>
+					<button>_</button></td>
+				</tr>
+			</table>
+			<br/>	
+			<table>
+				<tr>
+					<td><input id="slock" type="checkbox"/>SPEED-LOCK </td>
+					<td>SPEED: {{(speed+4)*10}}%</td>
+				</tr>
+				
+			</table>
+			</div>
+			<table>
+				<tr>
+					<td><button ng-click="resetbtn()">RESET</button></td>
+					<td>{{'SPEED VALUES:' + speedValues[left_vel_rng] + ';' + speedValues[right_vel_rng]}}</td>
+					<td>{{'VEL_RNG: L[' + left_vel_rng + ']; R[' + right_vel_rng +']'}}</td>					
+			</table>
+		</div>
+	</div>
+</div>
+
+<footer class="w3-container w3-teal">
+  <h6>Sobre</h6>
+  <p>UFPB, CEAR, Engenharia Elétrica. 2017</p>
+</footer>
+</body>
+
+<script src="vsss-bot.js"></script>
+<script src="keycustom.js"></script>
+</html>
